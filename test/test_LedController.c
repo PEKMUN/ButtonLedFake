@@ -26,7 +26,7 @@ void test_doTapTurnOnTapTurnOffLed_given_led_is_off_and_button_is_pressed_and_re
   TEST_ASSERT_EQUAL(LED_ON, info.currentLedState);
 }
 
-/*void test_doTapTurnOnTapTurnOffLed_given_led_is_on_and_button_is_pressed_and_released_expect_led_is_turned_off(void)
+void xtest_doTapTurnOnTapTurnOffLed_given_led_is_on_and_button_is_pressed_and_released_expect_led_is_turned_off(void)
 { 
   LedButtonInfo info = {LED_ON, BUTTON_RELEASED};
   
@@ -41,7 +41,7 @@ void test_doTapTurnOnTapTurnOffLed_given_led_is_off_and_button_is_pressed_and_re
   TEST_ASSERT_EQUAL(LED_OFF, info.currentLedState);
 }
 
-void test_doTapTurnOnTapTurnOffLed_given_led_is_off_and_button_is_pressed_and_pressed_and_pressed_expect_led_is_turned_on(void)
+/*void test_doTapTurnOnTapTurnOffLed_given_led_is_off_and_button_is_pressed_and_pressed_and_pressed_expect_led_is_turned_on(void)
 { 
   LedButtonInfo info = {LED_ON, BUTTON_RELEASED};
   
