@@ -9,6 +9,7 @@ struct LedButtonInfo
 {
   LedState currentLedState;
   ButtonState previousButtonState;
+  LedState firstLedState;
 };
 
 void turnOnLedIfButtonIsPressed();

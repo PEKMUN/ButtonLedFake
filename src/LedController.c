@@ -22,23 +22,22 @@ void doTapTurnOnTapTurnOffLed(LedButtonInfo *state)
       case BUTTON_RELEASED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-          state->currentLedState = state->currentLedState;
-          state->previousButtonState = state->previousButtonState;
+          state->currentLedState = 0;
+          state->previousButtonState = 0;
         }
         else 
         {
-		  turnLed(LED_ON);
-		  state->currentLedState = 1;
-		  state->previousButtonState = 1;
+          turnLed(LED_ON);
+          state->currentLedState = 0;
+          state->previousButtonState = 1;
         }
         break;
       
       case BUTTON_PRESSED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-		  turnLed(LED_ON);
-		  state->currentLedState = state->currentLedState;
-		  state->previousButtonState = state->previousButtonState;
+          state->currentLedState = 1;
+          state->previousButtonState = 0;
         }
         break;
       
@@ -55,21 +54,28 @@ void doTapTurnOnTapTurnOffLed(LedButtonInfo *state)
       case BUTTON_RELEASED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-          state->currentLedState = state->currentLedState;
-          state->previousButtonState = state->previousButtonState;
+          state->currentLedState = 1;
+          state->previousButtonState = 0;
         }
         else 
         {
-          state->currentLedState = state->currentLedState;
-          state->previousButtonState = state->previousButtonState;
+          state->currentLedState = 1;
+          state->previousButtonState = 1;
         }
         break;
       
       case BUTTON_PRESSED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-          state->currentLedState = state->currentLedState;
-          state->previousButtonState = state->previousButtonState;
+          if(state->firstLedState == LED_OFF)
+          {
+            state->currentLedState = state->currentLedState;
+            state->previousButtonState = state->previousButtonState;
+          }
+          else 
+            turnLed(LED_OFF);
+            state->currentLedState = 1;
+            state->previousButtonState = 0;
         }
         break;
       
