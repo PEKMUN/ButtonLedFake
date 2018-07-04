@@ -39,6 +39,11 @@ void doTapTurnOnTapTurnOffLed(LedButtonInfo *state)
           state->currentLedState = LED_ON;
           state->previousButtonState = BUTTON_RELEASED;
         }
+        else
+        {
+          state->currentLedState = LED_OFF;
+          state->previousButtonState = BUTTON_PRESSED;
+        }
         break;
       
       default:
@@ -67,9 +72,14 @@ void doTapTurnOnTapTurnOffLed(LedButtonInfo *state)
       case BUTTON_PRESSED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-            turnLed(LED_OFF);
-            state->currentLedState = LED_OFF;
-            state->previousButtonState = BUTTON_RELEASED;
+          turnLed(LED_OFF);
+          state->currentLedState = LED_OFF;
+          state->previousButtonState = BUTTON_RELEASED;
+        }
+        else
+        {
+          state->currentLedState = LED_ON;
+          state->previousButtonState = BUTTON_PRESSED;
         }
         break;
       
