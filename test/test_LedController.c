@@ -13,7 +13,7 @@ void tearDown(void)
 
 void test_doTapTurnOnTapTurnOffLed_given_led_is_off_and_button_is_pressed_and_released_expect_led_is_turned_on(void)
 { 
-  LedButtonInfo info = {LED_OFF, BUTTON_RELEASED, LED_OFF};
+  LedButtonInfo info = {LED_OFF, BUTTON_RELEASED};
   
   getButtonState_ExpectAndReturn(BUTTON_RELEASED);
   doTapTurnOnTapTurnOffLed(&info);
@@ -28,15 +28,16 @@ void test_doTapTurnOnTapTurnOffLed_given_led_is_off_and_button_is_pressed_and_re
 
 void test_doTapTurnOnTapTurnOffLed_given_led_is_on_and_button_is_pressed_and_released_expect_led_is_turned_off(void)
 { 
-  LedButtonInfo info = {LED_ON, BUTTON_RELEASED, LED_ON};
+  LedButtonInfo info = {LED_ON, BUTTON_RELEASED};
   
   getButtonState_ExpectAndReturn(BUTTON_RELEASED);
   doTapTurnOnTapTurnOffLed(&info);
   getButtonState_ExpectAndReturn(BUTTON_PRESSED);
   doTapTurnOnTapTurnOffLed(&info);
   getButtonState_ExpectAndReturn(BUTTON_RELEASED);
-  doTapTurnOnTapTurnOffLed(&info);
+  //doTapTurnOnTapTurnOffLed(&info);
   turnLed_Expect(LED_OFF);
+  doTapTurnOnTapTurnOffLed(&info);
   
   TEST_ASSERT_EQUAL(LED_OFF, info.currentLedState);
 }

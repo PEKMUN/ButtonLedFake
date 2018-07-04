@@ -22,22 +22,22 @@ void doTapTurnOnTapTurnOffLed(LedButtonInfo *state)
       case BUTTON_RELEASED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-          state->currentLedState = 0;
-          state->previousButtonState = 0;
+          state->currentLedState = LED_OFF;
+          state->previousButtonState = BUTTON_RELEASED;
         }
         else 
         {
           turnLed(LED_ON);
-          state->currentLedState = 0;
-          state->previousButtonState = 1;
+          state->currentLedState = LED_OFF;
+          state->previousButtonState = BUTTON_PRESSED;
         }
         break;
       
       case BUTTON_PRESSED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-          state->currentLedState = 1;
-          state->previousButtonState = 0;
+          state->currentLedState = LED_ON;
+          state->previousButtonState = BUTTON_RELEASED;
         }
         break;
       
@@ -54,28 +54,22 @@ void doTapTurnOnTapTurnOffLed(LedButtonInfo *state)
       case BUTTON_RELEASED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-          state->currentLedState = 1;
-          state->previousButtonState = 0;
+          state->currentLedState = LED_ON;
+          state->previousButtonState = BUTTON_RELEASED;
         }
         else 
         {
-          state->currentLedState = 1;
-          state->previousButtonState = 1;
+          state->currentLedState = LED_ON;
+          state->previousButtonState = BUTTON_PRESSED;
         }
         break;
       
       case BUTTON_PRESSED:
         if(getButtonState() == BUTTON_RELEASED)
         {
-          if(state->firstLedState == LED_OFF)
-          {
-            state->currentLedState = state->currentLedState;
-            state->previousButtonState = state->previousButtonState;
-          }
-          else 
             turnLed(LED_OFF);
-            state->currentLedState = 1;
-            state->previousButtonState = 0;
+            state->currentLedState = LED_OFF;
+            state->previousButtonState = BUTTON_RELEASED;
         }
         break;
       
