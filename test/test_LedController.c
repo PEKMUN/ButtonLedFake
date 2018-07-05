@@ -5,57 +5,52 @@
 
 int turnLedCallNumbers = 0;
 int expectedGetButtonStateMaxCalls = 0;
-int  expectedTurnLedMaxCalls = 0;
+int expectedTurnLedMaxCalls = 0;
 ButtonState *expectedButtonStates = NULL;
 LedState *expectedLedStates = NULL;
 
-void setUp(void)
-{
-}
+void setUp(void){}
 
-void tearDown(void)
-{
-}
+void tearDown(void){}
 
 void fake_turnLed(LedState state, int NumCalls)
 {
 	turnLedCallNumbers++;
-	if(NumCalls < expectedTurnLedMaxCalls)
-	{
-		if(state != expectedLedStates[NumCalls])
+	if(NumCalls < expectedTurnLedMaxCalls){
+		if(state !=  expectedLedStates[NumCalls])
 		{
-			TEST_FAIL_MESSAGE("turnLed() was called with ???, but expect ???");
+		TEST_FAIL_MESSAGE("turnLed() was called with ???, but expect ???");
 		}
 	}
-	else
+	else 
 		TEST_FAIL_MESSAGE("turnLed() was called with ???, but expect ???");
+	
 }
 
 ButtonState fake_getButtonState(int NumCalls)
 {
-	if(NumCalls < expectedGetButtonStateMaxCalls)
-	{
+	if(NumCalls < expectedGetButtonStateMaxCalls){
 		return expectedButtonStates[NumCalls];
 	}
-	else
-		TEST_FAIL_MESSAGE("Receive extra getButtonState() calls");
+	else 
+		TEST_FAIL_MESSAGE("Recieved extra getButtonStete() calls");
 }
 
-void setupFake(LedState expLedStates[], int ledMaxCalls, ButtonState buttStates[], int buttonMaxCalls)
+void setupFake(LedState expLedStates[], int ledMaxCalls ,ButtonState buttStates[], int buttonMaxCalls)
 {
-	turnLedCallNumbers = 0;
+	turnLedCallNumbers =  0;
 	turnLed_StubWithCallback(fake_turnLed);
-	expLedStates = expLedStates;
+	expectedLedStates = expLedStates;
 	expectedTurnLedMaxCalls = ledMaxCalls;
 	getButtonState_StubWithCallback(fake_getButtonState);
-	expectedButtonStates = buttStates;
 	expectedGetButtonStateMaxCalls = buttonMaxCalls;
+	expectedButtonStates = buttStates;
 }
 
-void verifyTurnLedCalls(int NumCalls)
+void verifyTurnLedCalls(int numCalls)
 {
-	if(turnLedCallNumbers != NumCalls)
-		TEST_FAIL_MESSAGE("turnLed() was not called at all. But 1 call is expected.");
+	if(turnLedCallNumbers != numCalls)
+		TEST_FAIL_MESSAGE("turnLed() was not calld at all.But 1 call is expected.");
 }
 
 void test_doTapTurnOnTapTurnOffLed_given_led_is_off_and_button_is_pressed_and_released_expect_led_is_turned_on(void)
